@@ -6,8 +6,17 @@
 pageextension 50000 CustomerListExt extends "Customer List"
 {
     trigger OnOpenPage();
+    var
+        customer: Record Customer;
+        lblHelloWorld: Label 'Hello World';
+
     begin
-        Message('App published: Hello world');
+        Message(lblHelloWorld);
+        if customer.FindFirst() then
+            repeat
+                Message('Customer No: %1, Name: %2', customer."No.", customer.Name);
+            until customer.Next() = 0;
+
     end;
 }
 
